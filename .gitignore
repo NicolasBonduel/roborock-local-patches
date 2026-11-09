@@ -13,3 +13,4 @@ local.properties
 node_modules/
 *.log
 __pycache__/
+morphe-signing.key

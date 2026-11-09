@@ -1,21 +1,22 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
-plugins {
-    kotlin("jvm") version "2.4.21"
-}
-
 group = "local.roborock"
-version = "0.1.0"
+version = rootProject.version
 
-repositories { mavenCentral() }
-
-dependencies {
-    compileOnly(files(rootProject.file("tools/morphe-desktop.jar")))
+patches {
+    about {
+        name = "Roborock Local Server patches"
+        description = "Local server login and saved-URL patches for Roborock 4.76.08 (build 100944, arm64-v8a)"
+        source = "https://github.com/NicolasBonduel/roborock-local-patches"
+        author = "Nicolas Bonduel"
+        contact = "https://github.com/NicolasBonduel/roborock-local-patches/issues"
+        website = "https://github.com/NicolasBonduel/roborock-local-patches"
+        license = "0BSD"
+    }
 }
 
-kotlin.compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
-java.sourceCompatibility = JavaVersion.VERSION_17
-java.targetCompatibility = JavaVersion.VERSION_17
+// The bundle keeps its own name instead of the default "patches-<version>.mpp".
+tasks.jar {
+    archiveFileName.set("roborock-local-server-${version}.mpp")
+}
 
 val compileLoginUi = tasks.register<Exec>("compileLoginUi") {
     workingDir(rootProject.projectDir)
@@ -36,38 +37,27 @@ tasks.processResources {
     from(layout.buildDirectory.dir("generated-resources"))
 }
 
-tasks.jar {
-    manifest.attributes(
-        "Name" to "Roborock Local Server",
-        "Description" to "Direct local-server login for Roborock 4.76.08 arm64",
-        "Version" to project.version,
-        "Patcher-Version" to "2.3.0",
-        "License" to "0BSD",
-    )
+// Separate configuration so gson is available at runtime for the
+// generatePatchesList task but never bundled into the patch bundle.
+val patchListGeneratorClasspath = configurations.create("patchListGeneratorClasspath")
+
+dependencies {
+    compileOnly(libs.gson)
+    patchListGeneratorClasspath(libs.gson)
 }
 
-val dexDirectory = layout.buildDirectory.dir("dex")
-val androidSdk = providers.environmentVariable("ANDROID_HOME").orElse("${System.getProperty("user.home")}/Library/Android/sdk")
+tasks {
+    register<JavaExec>("generatePatchesList") {
+        description = "Build patch bundle and generate patches-list.json"
 
-val compileDex = tasks.register<Exec>("compileDex") {
-    dependsOn(tasks.jar)
-    val jar = tasks.jar.flatMap { it.archiveFile }
-    inputs.file(jar)
-    outputs.dir(dexDirectory)
-    doFirst {
-        dexDirectory.get().asFile.mkdirs()
-        commandLine(
-            "${androidSdk.get()}/build-tools/35.0.0/d8", "--release", "--min-api", "26",
-            "--classpath", rootProject.file("tools/morphe-desktop.jar"),
-            "--output", dexDirectory.get().asFile, jar.get().asFile,
-        )
+        dependsOn(build)
+
+        classpath = sourceSets["main"].runtimeClasspath + patchListGeneratorClasspath
+        mainClass.set("util.PatchListGeneratorKt")
     }
-}
 
-tasks.register<Zip>("buildAndroid") {
-    dependsOn(compileDex)
-    archiveFileName.set("roborock-local-server-${project.version}.mpp")
-    destinationDirectory.set(layout.buildDirectory.dir("libs"))
-    from(tasks.jar.map { zipTree(it.archiveFile.get().asFile) })
-    from(dexDirectory)
+    // Used by gradle-semantic-release-plugin.
+    publish {
+        dependsOn("generatePatchesList")
+    }
 }

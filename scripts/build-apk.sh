@@ -22,8 +22,12 @@ if [ ! -f signing/roborock-local.jks ]; then
     chmod 600 signing/roborock-local.jks
 fi
 
+bundle="$(find patches/build/libs -maxdepth 1 -type f -name 'roborock-local-server-*.mpp' \
+    ! -name '*sources*' ! -name '*javadoc*' -print -quit)"
+[ -n "$bundle" ] || { echo "roborock-local-server-*.mpp not found under patches/build/libs" >&2; exit 1; }
+
 java -jar tools/morphe-desktop.jar patch \
-    -p patches/build/libs/roborock-local-server-0.1.0.mpp \
+    -p "$bundle" \
     --unsigned --validate -o dist/roborock-local-unsigned.apk \
     -r dist/patch-result.json "$original_apk"
 
@@ -37,4 +41,4 @@ java -jar tools/morphe-desktop.jar patch \
 python3 scripts/verify-apk.py "$original_apk" "$output_apk" > "dist/apk-verification-${app_version}.json"
 cp "dist/apk-verification-${app_version}.json" dist/apk-verification.json
 cp dist/patch-result.json "dist/patch-result-${app_version}.json"
-cp patches/build/libs/roborock-local-server-0.1.0.mpp dist/
+cp "$bundle" dist/
