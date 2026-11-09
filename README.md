@@ -11,12 +11,23 @@ Adds a Local server button to the bundled login screen, patches the native signi
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
+> **[v1.0.0](https://github.com/NicolasBonduel/roborock-local-patches/releases/tag/v1.0.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;1 patches total
+<details open>
+<summary>📦 Roborock&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
 
-<!-- Do not modify this section by hand. The patch list is generated when release.yml creates a new release. -->
+**Package name:** `com.roborock.smart`
 
-#### A list of patches will automatically be shown here after the first release is created.
+**🎯 Supported versions:**
 
-&nbsp;
+| 4.76.08 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Local server login](#local-server-login) | Adds HTTPS server, email and local PIN login. Supports Roborock 4.76.08 arm64. |  |
+
+</details>
 
 <!-- PATCHES_END -->
 
