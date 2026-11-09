@@ -1,4 +1,4 @@
-# Roborock Local Server patch
+# Roborock Local Server patch for Morphe
 
 > [!WARNING]
 > Roborock Local Server add-on **1.2.1** requires additional server-side fixes: [#207](https://github.com/Python-roborock/local_roborock_server/pull/207) (missing product metadata causing device initialization error `-21020`), [#224](https://github.com/Python-roborock/local_roborock_server/pull/224) (product-ID and plugin-catalog resolution), and [#209](https://github.com/Python-roborock/local_roborock_server/pull/209) (the app-agreement endpoint). The Android patch does **not** install these server fixes; login alone does not establish device/plugin compatibility.
