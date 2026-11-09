@@ -26,33 +26,28 @@ python3 scripts/apk_profiles.py '/absolute/path/to/original.apk'
 It prints `4.76.08` on success and exits with an error for other files.
 The patch also checks the original login bundle, native library, instruction bytes, and getter structure. Do not bypass a fingerprint failure with force.
 
-## Patch and install locally
+## Patch and install on your phone
 
-You can patch directly on your Android phone. Use a recent [Morphe Manager](https://github.com/MorpheApp/morphe-manager/releases) supporting the current `patch` API; these instructions use Manager 2.5.0. The `.mpp` bundle contains JVM classes and Android DEX.
+You need the **`.mpp` bundle** — build it via [Build locally](#build-locally) or get it from whoever built this patch — and an **original, unpatched Roborock 4.76.08 APK (build 100944, arm64-v8a)**. Copy both into your phone's Downloads folder. Use a recent [Morphe Manager](https://github.com/MorpheApp/morphe-manager/releases); these steps use Manager 2.5.0.
 
-1. Build the bundle using [Build locally](#build-locally), or obtain it from the person who built this patch. Copy **`patches/build/libs/roborock-local-server-0.1.0.mpp`** and an **original, unpatched Roborock 4.76.08 APK (build 100944, arm64-v8a)** into your phone's **Downloads** folder. The bundle is the patch source; the APK is the app to patch. Do not select the already-patched APK or extract it from the installed patched app.
-2. In Morphe, open **Sources → + → Local** and select `roborock-local-server-0.1.0.mpp` from Downloads. If updating a previously imported local source, replace/update that source with the new bundle; local sources do not update automatically.
-3. Select **Roborock**, choose **4.76.08**, and select **No, I already have an APK** when prompted. Choose the original APK you copied. If the manual controls are hidden, enable **Expert mode** in Settings under Patching. Labels may vary between Manager versions.
-4. Select **Local server login**. Keep the patch's required dependencies selected, then tap **Patch**.
-5. After patching succeeds, tap **Install** and allow Android's install permission for Morphe if prompted. If the existing Roborock app uses a different signing key, Android will reject the upgrade. To switch to Morphe's key, uninstall **Roborock only**, then install the patched result. This clears Roborock's local login/settings; you will enter the server address, email, and PIN again. You do not need to import this project's development signing key for a fresh installation.
-6. Open Roborock and follow the Local server login steps above. Keep Morphe's app data and signing key for future updates: updates must use the same key to preserve Roborock's data.
+1. In Morphe, open **Sources → + → Local** and select `roborock-local-server-0.1.0.mpp` from Downloads. Local sources do not update automatically — replace an imported source when you build a newer bundle.
+2. Select **Roborock → 4.76.08 → No, I already have an APK**, then choose the original APK. Do not pick an already-patched APK. If the manual controls are hidden, enable **Expert mode** in Settings under Patching.
+3. Select **Local server login**, keep the required dependencies, tap **Patch**, then **Install**.
+4. If Android rejects the upgrade, the installed Roborock uses a different signing key: uninstall **Roborock only** and install the patched APK instead. This clears Roborock's data — address, email, and PIN must be re-entered. Future updates must come from Morphe's key to preserve that data.
 
-**Bundle not visible in the file picker?** Open the picker from **Sources → + → Local**, rather than the APK-selection step. Browse to **Internal storage → Download** if the Downloads shortcut is stale, and close/reopen the picker after copying files. Files transferred with ADB may need a media scan before Android lists them. On one phone, copying the bundle directly into Downloads and refreshing the index resolved an apparently empty subfolder.
+**Bundle not visible in the picker?** Open the picker from **Sources → + → Local**, not the APK-selection step. Browse to **Internal storage → Download** if the shortcut is stale, reopen the picker after copying files, and media-scan ADB-transferred files.
 
 See Morphe's [local patch source guide](https://github.com/MorpheApp/morphe-manager/blob/main/docs/patch-sources.md) and [expert patching guide](https://github.com/MorpheApp/morphe-manager/blob/main/docs/patching-expert-mode.md).
 
 ## Connect to your server
 
-1. Open the patched Roborock app and reach the login screen.
-2. Tap the server icon beside the phone, Google, and Facebook login buttons. A **Local server** label and curved arrow point to it.
-3. Enter your local HTTPS URL, including the port (default `555`), your server's configured `protocol_login_email`, and its six-digit `protocol_login_pin`.
-4. Tap **Connect**. The server must already be configured with your vacuum and inventory.
-5. Check device listing, map loading, one basic command, and reopening the app after force-stopping it.
+1. Open Roborock and reach the login screen. A curved arrow points at the server icon beside the phone, Google, and Facebook buttons.
+2. Enter your local HTTPS URL including the port (default `555`), the server's `protocol_login_email`, and its six-digit `protocol_login_pin` — not the admin password or `admin.session_secret`. The server must already be configured with your vacuum and inventory.
+3. Tap **Connect**, then check device listing, map loading, and one basic command. Force-stop and reopen the app to confirm the session persists.
 
-Use the local protocol PIN, not the server's admin password or `admin.session_secret`.
 The phone must reach the server over LAN or your own remote-access VPN, and the HTTPS certificate must be valid and trusted on the phone.
 
-The form remembers only the address and email. It clears the PIN after a valid session response or when the form is closed. The app's existing native account flow stores the resulting session credentials.
+The form saves only the address and email; it clears the PIN after a successful login or when the dialog closes. The app's existing native account flow stores the session credentials.
 
 ## Distribution
 
