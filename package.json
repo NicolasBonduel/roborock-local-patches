@@ -1,0 +1,12 @@
+{
+  "name": "roborock-local-server-patch",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build:js": "node scripts/build-login-ui.cjs",
+    "test": "node --test tests/*.test.cjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12"
+  }
+}

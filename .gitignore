@@ -1,0 +1,15 @@
+.gradle/
+**/build/
+tools/
+dist/
+*.keystore
+*.jks
+signing/
+*.apk
+*.apkm
+*.apks
+*.xapk
+local.properties
+node_modules/
+*.log
+__pycache__/
