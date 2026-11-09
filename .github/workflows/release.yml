@@ -48,8 +48,8 @@ jobs:
         if: steps.release.outputs.new_release_published == 'true'
         uses: actions/attest-build-provenance@v4
         with:
-          subject-name: 'Roborock Local Server patch ${{ steps.release.outputs.new_release_git_tag }}'
-          subject-path: patches/build/libs/roborock-local-server-*.mpp
+          subject-name: 'Roborock Local Server patches ${{ steps.release.outputs.new_release_git_tag }}'
+          subject-path: patches/build/libs/patches-*.mpp
 
       # Always verify compilation when semantic-release did not publish a release.
       # This covers non-main branches, chore commits, docs commits, etc.

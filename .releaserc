@@ -33,7 +33,7 @@
       "@MorpheApp/changelog", {
         "releaseJson": {
           "path": "patches-bundle.json",
-          "downloadUrlTemplate": "https://github.com/${owner}/${repo}/releases/download/v${version}/roborock-local-server-${version}.mpp",
+          "downloadUrlTemplate": "https://github.com/${owner}/${repo}/releases/download/v${version}/patches-${version}.mpp",
           "signatureUrlTemplate": "",
           "publicKeyPath": "morphe-signing.pub"
         }
@@ -64,7 +64,7 @@
       {
         "assets": [
           {
-            "path": "patches/build/libs/roborock-local-server-!(*sources*|*javadoc*).mpp"
+            "path": "patches/build/libs/patches-!(*sources*|*javadoc*).mpp"
           }
         ],
         "successComment": false

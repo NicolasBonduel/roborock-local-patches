@@ -13,11 +13,6 @@ patches {
     }
 }
 
-// The bundle keeps its own name instead of the default "patches-<version>.mpp".
-tasks.jar {
-    archiveFileName.set("roborock-local-server-${version}.mpp")
-}
-
 val compileLoginUi = tasks.register<Exec>("compileLoginUi") {
     workingDir(rootProject.projectDir)
     commandLine("npm", "run", "build:js")

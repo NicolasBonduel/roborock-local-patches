@@ -22,9 +22,9 @@ if [ ! -f signing/roborock-local.jks ]; then
     chmod 600 signing/roborock-local.jks
 fi
 
-bundle="$(find patches/build/libs -maxdepth 1 -type f -name 'roborock-local-server-*.mpp' \
+bundle="$(find patches/build/libs -maxdepth 1 -type f -name 'patches-*.mpp' \
     ! -name '*sources*' ! -name '*javadoc*' -print -quit)"
-[ -n "$bundle" ] || { echo "roborock-local-server-*.mpp not found under patches/build/libs" >&2; exit 1; }
+[ -n "$bundle" ] || { echo "patches-*.mpp not found under patches/build/libs" >&2; exit 1; }
 
 java -jar tools/morphe-desktop.jar patch \
     -p "$bundle" \
