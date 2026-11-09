@@ -116,4 +116,4 @@ If sharing logs, remove credentials, tokens, MQTT keys, and personal identifiers
 - [Local server](https://github.com/Python-roborock/local_roborock_server)
 - [Morphe patch API](https://github.com/MorpheApp/morphe-patcher)
 
-Patch source is GPLv3; see LICENSE and NOTICE. Original Roborock app code and assets are not included in the source distribution.
+Patch source is 0BSD (Zero-Clause BSD); see LICENSE. Morphe branding restrictions remain in NOTICE. Original Roborock app code and assets are not included in the source distribution.

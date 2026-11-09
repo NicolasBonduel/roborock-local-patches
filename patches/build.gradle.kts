@@ -42,7 +42,7 @@ tasks.jar {
         "Description" to "Direct local-server login for Roborock 4.76.08 arm64",
         "Version" to project.version,
         "Patcher-Version" to "2.3.0",
-        "License" to "GPLv3",
+        "License" to "0BSD",
     )
 }
 
