@@ -37,9 +37,18 @@ Adds a Local server button to the bundled login screen, patches the native signi
 
 Releases are signed by this project; Morphe verifies each release against [`morphe-signing.pub`](morphe-signing.pub) in this repository and refuses a bundle that was changed or swapped after publication.
 
+## Screenshots
+
+<p align="center">
+  <img src=".github/assets/login-screen.png" width="270" alt="Roborock login screen with a curved arrow pointing at the server icon, labeled Local server" />
+  <img src=".github/assets/local-server-dialog.png" width="270" alt="Local server dialog with server URL, login email, and PIN fields" />
+</p>
+
+The arrow on the login screen points at the server icon beside the social login buttons. The dialog asks for the server URL, the login email, and the protocol PIN.
+
 ### Install from a local bundle instead
 
-Anyone can add this repository directly; a local bundle is only needed without the source. [Build](#build-locally) or obtain `roborock-local-server-<version>.mpp`, copy it into your phone's Downloads folder, then in Morphe open **Sources → + → Local** and select the file. Local sources never update on their own — pick a new file with **Update** on the source card when a new bundle comes out. **Bundle not visible in the picker?** Open the picker from **Sources → + → Local** (not the APK-selection step), browse to **Internal storage → Download** if the shortcut is stale, reopen the picker after copying files, and media-scan ADB-transferred files.
+Anyone can add this repository directly; a local bundle is only needed without the source. [Build](#build-locally) or obtain `patches-<version>.mpp`, copy it into your phone's Downloads folder, then in Morphe open **Sources → + → Local** and select the file. Local sources never update on their own — pick a new file with **Update** on the source card when a new bundle comes out. **Bundle not visible in the picker?** Open the picker from **Sources → + → Local** (not the APK-selection step), browse to **Internal storage → Download** if the shortcut is stale, reopen the picker after copying files, and media-scan ADB-transferred files.
 
 Do not patch an already-patched APK or an APK extracted from the installed patched app.
 
@@ -92,7 +101,7 @@ npm ci --ignore-scripts
 ./gradlew buildAndroid --console=plain
 ```
 
-The bundle is `patches/build/libs/roborock-local-server-<version>.mpp`. Set `MORPHE_SIGNING_KEY` (or keep `morphe-signing.key` at the repository root, ignored by git) to sign it; an unsigned bundle is only valid while no signing public key is committed.
+The bundle is `patches/build/libs/patches-<version>.mpp`. Set `MORPHE_SIGNING_KEY` (or keep `morphe-signing.key` at the repository root, ignored by git) to sign it; an unsigned bundle is only valid while no signing public key is committed.
 
 To patch, sign, and audit your own APK on the desktop, additionally download the official `morphe-desktop-2.1.1-all.jar` from
 https://github.com/MorpheApp/morphe-desktop/releases/tag/v2.1.1
