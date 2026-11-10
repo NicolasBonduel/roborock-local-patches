@@ -55,7 +55,8 @@ val localServerPatch = patch(
     name = "Local server login",
     description = "Lets Roborock log in to your own Roborock Local Server instead of Roborock's cloud. " +
         "Adds a server button to the login screen, where you enter the server's HTTPS address, email and PIN. " +
-        "Also turns off the app's signature check, which would otherwise close the re-signed app on launch.",
+        "Also turns off the app's signature check, which would otherwise close the re-signed app on launch. " +
+        "Needs a Roborock Local Server: github.com/Python-roborock/local_roborock_server.",
     default = true,
 ) {
     dependsOn(savedServerUrlPatch)
