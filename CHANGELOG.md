@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/NicolasBonduel/roborock-local-patches/compare/v1.0.0...v1.0.1) (2026-11-10)
+
+### 🐛 Bug Fixes
+
+* describe what the Local server login patch does ([1dd5d9a](https://github.com/NicolasBonduel/roborock-local-patches/commit/1dd5d9a268edc9d39b2806766cd93247d75bec63))
+* link the Roborock Local Server from the patch description ([0f1a9ed](https://github.com/NicolasBonduel/roborock-local-patches/commit/0f1a9edc499cf2a23978d3225d72f4d794ff8adc))
+
 ## 1.0.0 (2026-11-09)
 
 ### ✨ New Features

@@ -11,7 +11,7 @@ Adds a Local server button to the bundled login screen, patches the native signi
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.0.0](https://github.com/NicolasBonduel/roborock-local-patches/releases/tag/v1.0.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;1 patches total
+> **[v1.0.1](https://github.com/NicolasBonduel/roborock-local-patches/releases/tag/v1.0.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;1 patches total
 <details open>
 <summary>📦 Roborock&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
@@ -25,7 +25,7 @@ Adds a Local server button to the bundled login screen, patches the native signi
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [Local server login](#local-server-login) | Adds HTTPS server, email and local PIN login. Supports Roborock 4.76.08 arm64. |  |
+| [Local server login](#local-server-login) | Lets Roborock log in to your own Roborock Local Server instead of Roborock's cloud. Adds a server button to the login screen, where you enter the server's HTTPS address, email and PIN. Also turns off the app's signature check, which would otherwise close the re-signed app on launch. Needs a Roborock Local Server: github.com/Python-roborock/local_roborock_server. |  |
 
 </details>
 

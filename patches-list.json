@@ -1,10 +1,10 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "patches": [
     {
       "name": "Local server login",
-      "description": "Adds HTTPS server, email and local PIN login. Supports Roborock 4.76.08 arm64.",
+      "description": "Lets Roborock log in to your own Roborock Local Server instead of Roborock's cloud. Adds a server button to the login screen, where you enter the server's HTTPS address, email and PIN. Also turns off the app's signature check, which would otherwise close the re-signed app on launch. Needs a Roborock Local Server: github.com/Python-roborock/local_roborock_server.",
       "default": true,
       "category": null,
       "compatiblePackages": [
